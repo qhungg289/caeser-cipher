@@ -1,6 +1,7 @@
 def caeser_cipher(message, shift_factor)
   alphabet = 'abcdefghijklmnopqrstuvwxyz'
   result = ''
+  shifted_char = ''
 
   message.each_char do |m_char|
     case m_char
@@ -8,19 +9,17 @@ def caeser_cipher(message, shift_factor)
       shifted_index = (alphabet.index(m_char) + shift_factor) % 26
 
       shifted_char = alphabet[shifted_index]
-
-      result.concat shifted_char
     when /[A-Z]/
       shifted_index = (alphabet.index(m_char.downcase) + shift_factor) % 26
 
-      shifted_char = alphabet[shifted_index]
-
-      result.concat shifted_char.upcase
+      shifted_char = alphabet[shifted_index].upcase
     when ' '
-      result.concat ' '
+      shifted_char = ' '
     else
-      result.concat m_char
+      shifted_char = m_char
     end
+
+    result.concat shifted_char
   end
 
   result
